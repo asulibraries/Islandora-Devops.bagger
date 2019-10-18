@@ -34,6 +34,10 @@
           controller: App\Controller\IslandoraBaggerController::getLocation
           methods: [GET, HEAD]
 
+- name: Clear Symfony cache
+  command: rm -rf /var/www/html/islandora_bagger/var/cache/dev
+
+
 - name: Open permissions for logging
   file:
     path: "{{ bagger_home }}/islandora_bagger/var/log"

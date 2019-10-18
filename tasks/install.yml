@@ -1,0 +1,83 @@
+
+- name: Get Islandora bagger Microservice from Github
+  git:
+    repo: https://github.com/mjordan/islandora_bagger.git
+    dest: "{{ bagger_home }}/islandora_bagger"
+    force: yes
+
+- name: Change bagger directory ownership, group and permissions
+  file:
+    path: "{{ bagger_home }}/islandora_bagger"
+    owner:  "{{ webserver_app_user }}"
+    group:  "{{ webserver_app_user }}"
+    mode: '0755'
+    recurse: True
+
+- name: "Install  {{ bagger_home }}/islandora_bagger"
+  shell: composer install
+  args:
+    chdir: "{{ bagger_home }}/islandora_bagger"
+  become: "{{ webserver_app_user }}"
+
+
+- name: Add Islandora Ansible Routes
+  blockinfile:
+    path: "{{ bagger_home }}/islandora_bagger/config/routes.yaml"
+    create: no
+    block: |
+      app_islandora_bagger_create_bag_added:
+          path: /
+          controller: App\Controller\IslandoraBaggerController::create
+          methods: [POST]
+      app_islandora_bagger_get_bag_location_added:
+          path: /
+          controller: App\Controller\IslandoraBaggerController::getLocation
+          methods: [GET, HEAD]
+
+- name: Open permissions for logging
+  file:
+    path: "{{ bagger_home }}/islandora_bagger/var/log"
+    owner:  "{{ webserver_app_user }}"
+    group:  "{{ webserver_app_user }}"
+    mode: '0777'
+    recurse: True
+
+- name: Open cache
+  file:
+    path: "{{ bagger_home }}/islandora_bagger/var/cache/dev"
+    owner:  "{{ webserver_app_user }}"
+    group:  "{{ webserver_app_user }}"
+    mode: '0777'
+    recurse: True
+
+- name: Create target directory
+  file:
+    path: "{{ private_file_dir }}/bagger_config"
+    state: directory
+    owner: "{{ webserver_app_user }}"
+    group: "{{ webserver_app_user }}"
+    mode: '0777'
+  become: yes
+
+- name: Install Bagger RDM config file
+  template:
+    src: "bagger_config.j2"
+    dest: "{{ private_file_dir }}/bagger_config/islandora_bagger_config.yml"
+    owner: "{{ webserver_app_user }}"
+    group: "{{ webserver_app_user }}"
+  become_user: root
+
+
+- name: restart apache
+  service:
+    name: apache2
+    state: restarted
+
+- name: Install Drupal Islandora bagger module from Github
+  git:
+    repo: https://github.com/mjordan/islandora_bagger_integration.git
+    dest: "{{ drupal_core_path }}/modules/contrib/islandora_bagger_integration.git"
+    force: yes
+
+- name: Enable bagger drupal module
+  command: "{{ drush_path }} --root {{ drupal_core_path }} -y en islandora_bagger_integration"

@@ -1,0 +1,11 @@
+---
+# defaults file for IslandoraDevops.bagger
+bagger_home: /var/www/html
+webserver_app_user: "{% if ansible_os_family == 'RedHat' %}apache{% else %}vagrant{% endif %}"
+settings_dir: /var/www/html/drupal/web/sites/default
+private_file_dir: /var/www/html/private
+apache_restart_state: restarted
+drupal_base_url: 'http://localhost:8000'
+fedora_base_url: 'http://localhost:8080/fcrepo/rest/'
+
+

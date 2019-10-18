@@ -1,0 +1,8 @@
+  Alias "/api/createbag" "/{{ bagger_home }}/islandora_bagger/public"
+  <Directory "/{{ bagger_home }}/islandora_bagger/public">
+    FallbackResource /index.php
+    Require all granted
+    DirectoryIndex index.php
+    SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+  </Directory>
+

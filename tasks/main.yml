@@ -1,0 +1,16 @@
+---
+- include: apache_config.yml
+  tags:
+    - bagger
+    - apache
+
+- include: install.yml
+  tags:
+    - bagger
+    - bagger-install
+
+- include: configure_dirs.yml
+  tags:
+    - bagger
+
+

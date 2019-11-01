@@ -22,9 +22,9 @@ log_bag_creation: true
 # Optional. Static bag-info.txt tags. No plugin needed. You can use any combination
 # of tag name / value here, as long as ou seprate tags from values using a colon (:).
 bag-info:
-    Contact-Name: Mark Jordan
-    Contact-Email: bags@sfu.ca
-    Source-Organization: Simon Fraser University
+    Contact-Name: Admin
+    Contact-Email: admin@example.com
+    Source-Organization: Example University
     Foo: Bar
 
 # Optional. Whether or not to include the Payload-Oxum tag in bag-info.txt. Defaults to true.
@@ -49,7 +49,7 @@ bag-info:
 
 # Optional. Whether or not to log the serialized Bag's location so Islandora can
 # retrieve the Bag's download URL. Default is false.
-# log_bag_location: true
+log_bag_location: true
 
 ############################
 # Plugin-specific settings #
@@ -65,7 +65,7 @@ fedora_base_url: '{{ fedora_base_url }}'
 # Used by the 'AddMedia' plugin. These are the Drupal taxomony term IDs
 # from the "Islandora Media Use" vocabulary. Use an emply list (e.g., [])
 # to include all media.
-drupal_media_tags: ['/taxonomy/term/15']
+drupal_media_tags: ['/taxonomy/term/17']
 
 # Used by the 'AddMedia' plugin. Indicates whether the Bag should contain a file
 # named 'media_use_summary.tsv' that lists all the media files plus the taxonomy

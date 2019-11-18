@@ -17,7 +17,7 @@
   shell: composer install
   args:
     chdir: "{{ bagger_home }}/islandora_bagger"
-  become: "{{ webserver_app_user }}"
+  become_user: "{{ webserver_app_user }}"
 
 
 - name: Add Islandora Ansible Routes

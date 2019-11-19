@@ -8,8 +8,8 @@
 - name: Change bagger directory ownership, group and permissions
   file:
     path: "{{ bagger_home }}/islandora_bagger"
-    owner:  "{{ webserver_app_user }}"
-    group:  "{{ webserver_app_user }}"
+    owner:  "{{ ansible_ssh_user }}"
+    group:  "{{ ansible_ssh_user }}"
     mode: '0755'
     recurse: True
 
@@ -17,7 +17,7 @@
   shell: composer install
   args:
     chdir: "{{ bagger_home }}/islandora_bagger"
-  become: "{{ webserver_app_user }}"
+  become: "{{ ansible_ssh_user }}"
 
 
 - name: Add Islandora Ansible Routes
@@ -41,16 +41,16 @@
 - name: Open permissions for logging
   file:
     path: "{{ bagger_home }}/islandora_bagger/var/log"
-    owner:  "{{ webserver_app_user }}"
-    group:  "{{ webserver_app_user }}"
+    owner:  "{{ ansible_ssh_user }}"
+    group:  "{{ ansible_ssh_user }}"
     mode: '0777'
     recurse: True
 
 - name: Open cache
   file:
     path: "{{ bagger_home }}/islandora_bagger/var/cache/dev"
-    owner:  "{{ webserver_app_user }}"
-    group:  "{{ webserver_app_user }}"
+    owner:  "{{ ansible_ssh_user }}"
+    group:  "{{ ansible_ssh_user }}"
     mode: '0777'
     recurse: True
 
@@ -80,7 +80,7 @@
 - name: Install Drupal Islandora bagger module from Github
   git:
     repo: https://github.com/mjordan/islandora_bagger_integration.git
-    dest: "{{ drupal_core_path }}/modules/contrib/islandora_bagger_integration.git"
+    dest: "{{ drupal_core_path }}/modules/contrib/islandora_bagger_integration"
     force: yes
 
 - name: Enable bagger drupal module

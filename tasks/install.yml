@@ -87,3 +87,12 @@
 
 - name: Enable bagger drupal module
   command: "{{ drush_path }} --root {{ drupal_core_path }} -y en islandora_bagger_integration"
+
+- name: Set Bagger Mode
+  command: "{{ drush_path }} --root {{ drupal_core_path }} cset islandora_bagger_integration.settings islandora_bagger_mode {{ islandora_bagger_mode }} -y"
+
+- name: Set Bagger Config Path
+  command: "{{ drush_path }} --root {{ drupal_core_path }} cset islandora_bagger_integration.settings islandora_bagger_default_config_file_path {{ islandora_bagger_mode }} -y"
+
+- name: Set Bagger Local Install Path
+  command: "{{ drush_path }} --root {{ drupal_core_path }} cset islandora_bagger_integration.settings islandora_bagger_local_bagger_directory {{ islandora_bagger_local_bagger_directory }} -y"

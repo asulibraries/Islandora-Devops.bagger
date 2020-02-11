@@ -7,5 +7,8 @@ private_file_dir: /var/www/html/private
 apache_restart_state: restarted
 drupal_base_url: 'http://localhost:8000'
 fedora_base_url: 'http://localhost:8080/fcrepo/rest/'
+islandora_bagger_mode: 'local'
+islandora_bagger_default_config_file_path: 'private://bagger_config/islandora_bagger.config.yml'
+islandora_bagger_local_bagger_directory: '/var/www/html/islandora_bagger'
 
 

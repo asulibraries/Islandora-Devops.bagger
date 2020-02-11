@@ -57,38 +57,22 @@ log_bag_location: true
 
 # Required. Register plugins to populate bag-info.txt and the data directory.
 # Plugins are executed in the order they are listed here.
-plugins: ['AddBasicTags', 'AddMedia', 'AddNodeJson', 'AddNodeJsonld', 'AddMediaJson', 'AddMediaJsonld', 'AddFileFromTemplate', 'AddFedoraTurtle', 'AddNodeCsv']
+plugins: ['AddBasicTags', 'AddMultifileMedia', 'AddNodeJson', 'AddNodeJsonld', 'AddMediaJson', 'AddMediaJsonld', 'AddFedoraTurtle']
+media_file_fields: ['field_fits_file', 'field_media_image' ,'field_media_file']
+
 
 # Used by the 'AddFedoraTurtle' plugin.
-fedora_base_url: '{{ fedora_base_url }}'
+fedora_base_url: 'http://localhost:8080/fcrepo/rest/'
 
 # Used by the 'AddMedia' plugin. These are the Drupal taxomony term IDs
 # from the "Islandora Media Use" vocabulary. Use an emply list (e.g., [])
 # to include all media.
-drupal_media_tags: ['/taxonomy/term/17']
+drupal_media_tags: []
 
 # Used by the 'AddMedia' plugin. Indicates whether the Bag should contain a file
 # named 'media_use_summary.tsv' that lists all the media files plus the taxonomy
 # name corresponding to the 'drupal_media_tags' list. Default is false.
 include_media_use_list: true
-
-# Used by the 'AddMedia' plugin. Include this option save media files with the
-# specified subdirectories within the Bag's data directory. Include the trailing /.
-# media_file_directories: 'foo/bar/baz/'
-
-# Used by the 'AddFileFromTemplate' plugin.
-# template_path can be absolute or relative to the Islandora Bagger directory.
-template_path: 'templates/mods.twig'
-# template_output_filename will be assigned to the file generated from the teamplate,
-# which will be added to the Bag's data directory. You may include a subdirectory
-# or subdirectories as part of the filename.
-templated_output_filename: 'metadata/MODS.xml'
-
-# Used by the 'AddNodeCsv' plugin.
-# csv_output_filename will be assigned to the CSV file, which will be added to
-# the Bag's data directory. You may include a subdirectory or subdirectories
-# as part of the filename.
-csv_output_filename: 'metadata.csv'
 
 
 ####################

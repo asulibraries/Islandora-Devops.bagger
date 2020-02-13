@@ -1,7 +1,7 @@
 
 - name: Get Islandora bagger Microservice from Github
   git:
-    repo: https://github.com/mjordan/islandora_bagger.git
+    repo: https://github.com/roblib/islandora_bagger.git
     dest: "{{ bagger_home }}/islandora_bagger"
     force: yes
 
@@ -17,10 +17,6 @@
   shell: composer install
   args:
     chdir: "{{ bagger_home }}/islandora_bagger"
-
-
-
-
 
 - name: Add Islandora Ansible Routes
   blockinfile:
@@ -81,7 +77,7 @@
 
 - name: Install Drupal Islandora bagger module from Github
   git:
-    repo: https://github.com/mjordan/islandora_bagger_integration.git
+    repo: https://github.com/roblib/islandora_bagger_integration.git
     dest: "{{ drupal_core_path }}/modules/contrib/islandora_bagger_integration"
     force: yes
 

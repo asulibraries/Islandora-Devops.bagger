@@ -7,11 +7,11 @@ drupal_base_url: '{{ drupal_base_url }}'
 drupal_basic_auth: ['admin', 'islandora']
 
 # Required. How to name the Bag directory (or file if serialized). One of 'nid' or 'uuid'.
-bag_name: nid
+bag_name: uuid
 
 # Both temp_dir and output_dir are required.
 temp_dir: /tmp/islandora_bagger_temp
-output_dir: /var/www/html/drupal/web/sites/default/files
+output_dir: /var/www/html/private/bags
 
 # Required. Whether or not to zip up the Bag. One of 'false', 'zip', or 'tgz'.
 serialize: zip
@@ -22,10 +22,9 @@ log_bag_creation: true
 # Optional. Static bag-info.txt tags. No plugin needed. You can use any combination
 # of tag name / value here, as long as ou seprate tags from values using a colon (:).
 bag-info:
-    Contact-Name: Admin
-    Contact-Email: admin@example.com
-    Source-Organization: Example University
-    Foo: Bar
+    Contact-Name: ASU Repository
+    Contact-Email: repository@asu.edu
+    Source-Organization: Arizona State University
 
 # Optional. Whether or not to include the Payload-Oxum tag in bag-info.txt. Defaults to true.
 # include_payload_oxum: false
@@ -62,7 +61,7 @@ media_file_fields: ['field_fits_file', 'field_media_image' ,'field_media_file']
 
 
 # Used by the 'AddFedoraTurtle' plugin.
-fedora_base_url: 'http://localhost:8080/fcrepo/rest/'
+fedora_base_url: '{{ fedora_base_url }}'
 
 # Used by the 'AddMedia' plugin. These are the Drupal taxomony term IDs
 # from the "Islandora Media Use" vocabulary. Use an emply list (e.g., [])

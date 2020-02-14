@@ -92,3 +92,10 @@
 
 - name: Set Bagger Local Install Path
   command: "{{ drush_path }} --root {{ drupal_core_path }} cset islandora_bagger_integration.settings islandora_bagger_local_bagger_directory {{ islandora_bagger_local_bagger_directory }} -y"
+
+- name: Run the bagger queue on a cron
+  cron:
+    name: "run the bagger queue"
+    minute: "0"
+    hour: "2"
+    job: "cd {{islandora_bagger_local_bagger_directory}} && ./bin/console app:islandora_bagger:process_queue --queue=var/islandora_bagger.queue"

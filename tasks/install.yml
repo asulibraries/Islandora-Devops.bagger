@@ -77,9 +77,10 @@
 
 - name: Install Drupal Islandora bagger module from Github
   git:
-    repo: https://github.com/roblib/islandora_bagger_integration.git
-    dest: "{{ drupal_core_path }}/modules/contrib/islandora_bagger_integration"
+    repo: https://github.com/asulibraries/islandora_bagger_integration.git
+    dest: "{{ drupal_core_path }}/modules/custom/islandora_bagger_integration"
     force: yes
+    version: bag_node_action
 
 - name: Enable bagger drupal module
   command: "{{ drush_path }} --root {{ drupal_core_path }} -y en islandora_bagger_integration"

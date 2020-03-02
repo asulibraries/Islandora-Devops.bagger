@@ -36,9 +36,9 @@
   command: rm -rf /var/www/html/islandora_bagger/var/cache/dev
 
 
-- name: Open permissions for logging
+- name: Open permissions
   file:
-    path: "{{ bagger_home }}/islandora_bagger/var/log"
+    path: "{{ bagger_home }}/islandora_bagger/var"
     owner:  "{{ ansible_ssh_user }}"
     group:  "{{ ansible_ssh_user }}"
     mode: '0777'

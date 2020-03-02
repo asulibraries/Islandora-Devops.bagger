@@ -5,6 +5,25 @@
     dest: "{{ bagger_home }}/islandora_bagger"
     force: yes
 
+- name: set PHP memory limit
+  become: yes
+  ini_file:
+    path: /etc/php/7.2/cli/php.ini
+    section: PHP
+    option: memory_limit
+    value: '-1'
+
+- name: Update repositories cache and install "intl" package
+  apt:
+    name: php7.2-intl
+    update_cache: yes
+
+- name: Install Baggit tools
+  composer:
+    command: require
+    arguments: whikloj/bagittools
+    working_dir: "{{ bagger_home }}/islandora_bagger"
+
 - name: Change bagger directory ownership, group and permissions
   file:
     path: "{{ bagger_home }}/islandora_bagger"
@@ -69,6 +88,14 @@
     group: "{{ webserver_app_user }}"
   become_user: root
 
+- name: reset PHP memory limit
+  become: yes
+  ini_file:
+    path: /etc/php/7.2/cli/php.ini
+    section: PHP
+    option: memory_limit
+    value: '128M'
+
 
 - name: restart apache
   service:
@@ -88,7 +115,7 @@
   command: "{{ drush_path }} --root {{ drupal_core_path }} cset islandora_bagger_integration.settings islandora_bagger_mode {{ islandora_bagger_mode }} -y"
 
 - name: Set Bagger Config Path
-  command: "{{ drush_path }} --root {{ drupal_core_path }} cset islandora_bagger_integration.settings islandora_bagger_default_config_file_path {{ islandora_bagger_mode }} -y"
+  command: "{{ drush_path }} --root {{ drupal_core_path }} cset islandora_bagger_integration.settings islandora_bagger_default_config_file_path {{ islandora_bagger_default_config_file_path }} -y"
 
 - name: Set Bagger Local Install Path
   command: "{{ drush_path }} --root {{ drupal_core_path }} cset islandora_bagger_integration.settings islandora_bagger_local_bagger_directory {{ islandora_bagger_local_bagger_directory }} -y"

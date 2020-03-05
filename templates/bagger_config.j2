@@ -4,7 +4,7 @@
 
 # Required.
 drupal_base_url: '{{ drupal_base_url }}'
-drupal_basic_auth: ['admin', 'islandora']
+drupal_basic_auth: ['{{ drupal_account_name }}', '{{ drupal_account_pass }}']
 
 # Required. How to name the Bag directory (or file if serialized). One of 'nid' or 'uuid'.
 bag_name: uuid

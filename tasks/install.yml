@@ -1,17 +1,9 @@
 
 - name: Get Islandora bagger Microservice from Github
   git:
-    repo: https://github.com/roblib/islandora_bagger.git
+    repo: https://github.com/mjordan/islandora_bagger.git
     dest: "{{ bagger_home }}/islandora_bagger"
     force: yes
-
-- name: set PHP memory limit
-  become: yes
-  ini_file:
-    path: /etc/php/7.2/cli/php.ini
-    section: PHP
-    option: memory_limit
-    value: '-1'
 
 - name: Update repositories cache and install "intl" package
   apt:
@@ -87,15 +79,6 @@
     owner: "{{ webserver_app_user }}"
     group: "{{ webserver_app_user }}"
   become_user: root
-
-- name: reset PHP memory limit
-  become: yes
-  ini_file:
-    path: /etc/php/7.2/cli/php.ini
-    section: PHP
-    option: memory_limit
-    value: '128M'
-
 
 - name: restart apache
   service:

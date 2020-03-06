@@ -23,6 +23,11 @@
     name: php7.2-zip
     update_cache: yes
 
+- name: restart apache
+  service:
+    name: apache2
+    state: restarted
+
 - name: Install Baggit tools
   composer:
     command: require

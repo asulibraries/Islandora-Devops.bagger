@@ -58,6 +58,8 @@ log_bag_location: true
 # Required. Register plugins to populate bag-info.txt and the data directory.
 # Plugins are executed in the order they are listed here.
 plugins: ['AddBasicTags', 'AddMultifileMedia', 'AddNodeJson', 'AddNodeJsonld', 'AddMediaJson', 'AddMediaJsonld', 'AddFedoraTurtle']
+
+# Media file fields are required for the AddMultifileMedia plugin
 media_file_fields: ['field_fits_file', 'field_media_image' ,'field_media_file']
 
 

@@ -20,12 +20,6 @@
     name: apache2
     state: restarted
 
-- name: Install Baggit tools
-  composer:
-    command: require
-    arguments: whikloj/bagittools
-    working_dir: "{{ bagger_home }}/islandora_bagger"
-
 - name: Change bagger directory ownership, group and permissions
   file:
     path: "{{ bagger_home }}/islandora_bagger"
